@@ -68,11 +68,17 @@
           let arr = langSets[this.lang].weekNames
           return arr.slice(this.firstDay).concat(arr.slice(0, this.firstDay))
         }
+      },
+      currentDate : {
+        type : Object,
+        default () {
+          return new Date()
+        }
       }
     },
     data () {
       return {
-        currentDate : new Date()
+        // currentDate : new Date()
       }
     },
     methods : {
