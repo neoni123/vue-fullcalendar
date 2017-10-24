@@ -565,7 +565,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 	    },
 	    currentDate: {
-	      type: Object,
+	      type: Date,
 	      default: function _default() {
 	        return new Date();
 	      }
@@ -579,10 +579,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  methods: {
 	    emitChangeMonth: function emitChangeMonth(start, end, currentStart, current) {
-	      console.log('currentDate 2', this.currentDate);
-	      this.currentDate = current;
-	      console.log('currentDate 3', this.currentDate);
-	      this.$emit('changeMonth', start, end, currentStart);
+	      // console.log('currentDate 2', this.currentDate)
+	      // this.currentDate = current
+	      // console.log('currentDate 3', this.currentDate)
+	      // this.$emit('changeMonth', start, end, currentStart)
 	    },
 	    emitEventClick: function emitEventClick(event, jsEvent, pos) {
 	      this.$emit('eventClick', event, jsEvent, pos);
@@ -787,7 +787,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  watch: {
 	    weekNames: function weekNames(val) {
-	      console.log('watch weekNames', val);
+	      // console.log('watch weekNames', val)
 	    }
 	  },
 	  computed: {
@@ -1052,7 +1052,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        };
 
 	        _format = _format.replace(/([yMdhmsqS])+/g, function (all, t) {
-	            console.log('all', all, t, _format);
+	            // console.log('all', all, t, format)
 	            var v = map[t];
 	            if (v !== undefined) {
 	                if (all === 'MMMM') {
@@ -1071,7 +1071,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            }
 	            return all;
 	        });
-	        console.log('format res', _format);
+	        // console.log('format res', format)
 	        return _format;
 	    }
 	};
@@ -1327,8 +1327,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return {
 	      title: '',
 	      leftArrow: '<',
-	      rightArrow: '>',
-	      headDate: new Date()
+	      rightArrow: '>'
+	      // headDate : new Date()
 	    };
 	  },
 
@@ -1336,7 +1336,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    currentDate: function currentDate(val) {
 	      if (!val) return;
 	      this.headDate = val;
-	      console.log('currentDate', val);
+	      // console.log('currentDate', val)
+	      this.dispatchEvent();
 	      // this.headDate = JSON.parse(JSON.stringify(val))
 	    }
 	  },
@@ -1354,7 +1355,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	      return new Date(dt.setMonth(dt.getMonth() + num));
 	    },
 	    dispatchEvent: function dispatchEvent() {
+	      this.headDate = this.currentDate;
+	      // console.log('this.headDate:' + this.headDate)
 	      this.title = _dateFunc2.default.format(this.headDate, this.titleFormat, this.monthNames);
+	      // console.log('this.title:' + this.title)
 
 	      var startDate = _dateFunc2.default.getStartDate(this.headDate);
 	      var curWeekDay = startDate.getDay();
@@ -1403,24 +1407,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, [_vm._t("header-left")], 2), _vm._v(" "), _c('div', {
 	    staticClass: "header-center"
 	  }, [_c('span', {
-	    staticClass: "prev-month",
-	    on: {
-	      "click": function($event) {
-	        $event.stopPropagation();
-	        _vm.goPrev($event)
-	      }
-	    }
-	  }, [_vm._v(_vm._s(_vm.leftArrow))]), _vm._v(" "), _c('span', {
 	    staticClass: "title"
-	  }, [_vm._v(_vm._s(_vm.title))]), _vm._v(" "), _c('span', {
-	    staticClass: "next-month",
-	    on: {
-	      "click": function($event) {
-	        $event.stopPropagation();
-	        _vm.goNext($event)
-	      }
-	    }
-	  }, [_vm._v(_vm._s(_vm.rightArrow))])]), _vm._v(" "), _c('div', {
+	  }, [_vm._v(_vm._s(_vm.title))])]), _vm._v(" "), _c('div', {
 	    staticClass: "header-right"
 	  }, [_vm._t("header-right")], 2)])
 	},staticRenderFns: []}

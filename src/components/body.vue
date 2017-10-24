@@ -103,7 +103,7 @@
     },
     watch : {
       weekNames (val) {
-        console.log('watch weekNames', val)
+        // console.log('watch weekNames', val)
       }
     },
     computed : {

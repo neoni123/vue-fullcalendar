@@ -5,9 +5,9 @@
       </slot>
     </div>
     <div class="header-center">
-      <span class="prev-month" @click.stop="goPrev">{{leftArrow}}</span>
+      <!-- <span class="prev-month" @click.stop="goPrev">{{leftArrow}}</span> -->
       <span class="title">{{title}}</span>
-      <span class="next-month" @click.stop="goNext">{{rightArrow}}</span>
+      <!-- <span class="next-month" @click.stop="goNext">{{rightArrow}}</span> -->
     </div>
     <div class="header-right">
       <slot name="header-right">
@@ -32,15 +32,16 @@
       return {
         title      : '',
         leftArrow  : '<',
-        rightArrow : '>',
-        headDate : new Date()
+        rightArrow : '>'
+        // headDate : new Date()
       }
     },
     watch : {
       currentDate (val) {
         if (!val) return
         this.headDate = val
-        console.log('currentDate', val)
+        // console.log('currentDate', val)
+        this.dispatchEvent()
         // this.headDate = JSON.parse(JSON.stringify(val))
       }
     },
@@ -58,7 +59,10 @@
         return new Date(dt.setMonth(dt.getMonth() + num))
       },
       dispatchEvent() {
+        this.headDate = this.currentDate
+        // console.log('this.headDate:' + this.headDate)
         this.title = dateFunc.format(this.headDate, this.titleFormat, this.monthNames)
+        // console.log('this.title:' + this.title)
 
         let startDate = dateFunc.getStartDate(this.headDate)
         let curWeekDay = startDate.getDay()
